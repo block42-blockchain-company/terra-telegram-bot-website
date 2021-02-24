@@ -4,7 +4,7 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 
 module.exports = {
-    mode: 'development',
+    mode: 'production',
     entry: './src/scripts/index.ts',
     module: {
         rules: [

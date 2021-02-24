@@ -4,8 +4,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Terra Bot 🤖</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <title>Confirm transaction!</title>
 </head>
 
 <body>
@@ -14,14 +13,33 @@
     <div class="container">
         <div class="box">
             <h1 class="title has-text-centered">Hey, it's me again! 🤖</h1>
+            <h2 class="sub-title has-text-centered">If you have
+                <a target="_blank" rel="noopener noreferrer"
+                   href="https://chrome.google.com/webstore/detail/terra-station/aiifbnbfobpmeekipheeijimdpnlpgpp">Terra
+                    Station extension</a>
+                installed it should ask you for transaction approval</h2>
+            <h2 class="sub-title has-text-centered">If you have any problems with the extension not showing up, try
+                hard refreshing this page.</h2>
         </div>
-        <div id="error" class="notification is-danger hide">
+
+
+        <div id="no-extension" class="notification is-info has-text-centered hide">
+            <p>Please install <a target="_blank" rel="noopener noreferrer"
+                                 href="https://chrome.google.com/webstore/detail/terra-station/aiifbnbfobpmeekipheeijimdpnlpgpp">
+                Terra Station Extension
+            </a> to use this website.</p>
+            It is only available for
+            <a target="_blank" rel="noopener noreferrer"
+               href="https://www.google.com/chrome/">Chrome</a> in the moment.
         </div>
-        <h2 class="center">DETECT IF CHROME</h2>
-        <h2 class="center">DETECT IF EXTENSION INSTALLED</h2>
+
+        <div id="transaction-sent" class="notification is-success  has-text-centered hide">
+            <p>Successfully sent the transaction! You can close this site.</p>
+        </div>
 
     </div>
     </div>
 </section>
+
 </body>
 </html>

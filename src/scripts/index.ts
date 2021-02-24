@@ -1,35 +1,44 @@
-import {Wallet, MsgSend, Extension, LCDClient, MsgVote} from "@terra-money/terra.js";
-import {AccAddress} from "@terra-money/terra.js/dist/core/strings";
+import '../styles/style.css'
+import {Extension, MsgVote} from "@terra-money/terra.js";
 import {Convert} from "@terra-money/terra.js/dist/util/convert";
 import toNumber = Convert.toNumber;
+import {NoStationExtension} from "./errors";
 
 const extension = new Extension();
 
-setup_handlers()
 main().catch(e => {
-        const error = document.getElementById("error");
-        error.innerText = e.message;
-        // error.classList.toggle('hide')
+        if (e instanceof NoStationExtension) {
+            console.log("No extension")
+            const noExtension = document.getElementById("no-extension");
+            noExtension.classList.remove("hide");
+        } else {
+            appendError(e.message)
+        }
     }
 )
 
 async function main() {
     let isAvailable = extension.isAvailable
-    let urlParams = new URL(window.location.href).searchParams
+    if (!isAvailable) {
+        console.log("No station extension");
+        throw new NoStationExtension()
+    }
 
+    let address = (await extension.request("connect")).payload["address"]
+
+    let urlParams = new URL(window.location.href).searchParams
     let id = toNumber(urlParams.get('id'))
-    let voteOptionParam = urlParams.get('vote')
+    let voteOptionParam = urlParams.get('vote')?.toUpperCase()
     let voteOption: MsgVote.Option = MsgVote.Option[voteOptionParam]
 
     if (id == null || voteOption == null) {
+        console.log("Incorrect args");
         throw new Error("HTML arguments are incorrect!");
     }
 
-    await extension.connect();
-    let address = (await extension.request("connect")).payload["address"]
+    setup_handlers()
 
     let vote_message = new MsgVote(id, address, voteOption)
-
 
     extension.post({
         msgs: [vote_message]
@@ -38,41 +47,26 @@ async function main() {
 
 }
 
-/*
-*    if not wallet:
-        raise Exception("No MNEMONIC provided.")
-
-    vote_message = MsgVote(
-        proposal_id=proposal_id,
-        voter=AccAddress(wallet.address),
-        option=vote_option,
-    )
-
-    # TODO remove this when bug in jigu Terra.estimate_fee() function is fixed
-    fee = estimate_vote_fee(proposal_id, wallet.address, vote_option)
-    gas = fee['result']['gas']
-    uluna_fee = int(next(filter(lambda d: d['denom'] == 'uluna', fee['result']['fees']))['amount']) * 10
-
-    tx = wallet.create_and_sign_tx(
-        vote_message,
-        fee=StdFee.make(gas=gas, uluna=uluna_fee),
-    )
-
-    # TODO change mode to 'block' when jigu bug fixed (throws error "SUCCESS" even when broadcasted successfully)
-    return terra.broadcast(tx, mode="sync")
-
-
-*
-* */
-
-
 function setup_handlers() {
-    extension.on('connect', async (payload) => {
-        console.log("connected!")
-        console.log(payload)
-    });
-
-    extension.on('post', async (payload) => {
-        console.log("Posted!")
-    });
+    extension.on(async (payload) => {
+        if (payload.hasOwnProperty('success')) {
+            if (payload.success) {
+                console.log('success:');
+            } else {
+                appendError("Something went wrong! Please refresh this page to try again.")
+            }
+        }
+    })
 }
+
+
+function appendError(message) {
+    let error = document.createElement("div");
+    error.classList.add("notification", "is-danger", "has-text-centered")
+    error.innerHTML = message
+    document.querySelector("div.container").appendChild(error);
+}
+
+
+
+
