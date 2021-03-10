@@ -4,7 +4,6 @@
   "description": "",
   "private": true,
   "scripts": {
-    "build": "webpack",
     "start": "webpack serve --open",
     "build:prod": "webpack --config webpack.prod.js"
   },
@@ -25,6 +24,7 @@
   },
   "dependencies": {
     "@terra-money/terra.js": "^1.4.1",
+    "axios": "^0.21.1",
     "favicons-webpack-plugin": "^4.2.0",
     "html-webpack-plugin": "^4.5.2"
   }
