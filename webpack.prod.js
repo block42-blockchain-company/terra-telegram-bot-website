@@ -35,12 +35,12 @@ module.exports = {
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             template: 'src/index.html',
-            filename: 'vote',
+            filename: 'vote.html',
             chunks: ['vote', 'styles']
         }),
         new HtmlWebpackPlugin({
             template: 'src/index.html',
-            filename: 'delegate',
+            filename: 'delegate.html',
             chunks: ['delegate', 'styles']
         }),
         new FaviconsWebpackPlugin('./assets/favicon.png'),

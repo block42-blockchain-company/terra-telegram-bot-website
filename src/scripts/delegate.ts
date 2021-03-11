@@ -10,7 +10,7 @@ main().catch(e => {
 
 let walletAddress: string;
 let network: string;
-const backendUrl = 'http://terra-api.b42.tech/';
+const backendUrl = 'https://terra-bot.b42.tech/api/';
 let telegramAuthParams: string;
 
 async function main() {
