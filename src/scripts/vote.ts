@@ -17,10 +17,11 @@ async function main() {
     let address = (await extension.request("connect")).payload["address"]
     let urlParams = new URL(window.location.href).searchParams
     let votingId = toNumber(urlParams.get('id'))
-    let voteOptionParam = urlParams.get('vote')?.toUpperCase()
-    let voteOption: MsgVote.Option = MsgVote.Option[voteOptionParam]
+    let voteOptionParam = urlParams.get('vote')
+    const voteOption: MsgVote.Option = voteOptionParam as MsgVote.Option;
 
-    if (votingId == null || voteOption == null) {
+    const isCorrectVotingOption = Object.values(MsgVote.Option).indexOf(voteOption) >= 0;
+    if (!isCorrectVotingOption || votingId == null) {
         console.log("Incorrect args");
         throw new Error("HTTP arguments incorrect! This website should be used only with " +
             "<a href=\"https://github.com/block42-blockchain-company/terra-node-telegram-bot\">Terra Telegram Bot</a>.");
