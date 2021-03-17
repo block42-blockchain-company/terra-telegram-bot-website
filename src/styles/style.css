@@ -8,6 +8,22 @@
     display: inline-block;
 }
 
+/*Sticky footer*/
+html,
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+body > footer {
+    margin-top: auto;
+}
+
+.footer {
+    padding: 0.5rem;
+}
+
 
 /*Loader*/
 .lds-roller {
