@@ -1,6 +1,7 @@
 import {MsgGrantAuthorization} from "@terra-money/terra.js";
 import {appendError, appendSuccess, checkExtensionAvailability, extension, setIsLoading} from "./common";
 import axios from "axios";
+import {backendUrl} from "./consts";
 
 main().catch(e => {
         console.log(e);
@@ -10,7 +11,6 @@ main().catch(e => {
 
 let walletAddress: string;
 let network: string;
-const backendUrl = 'https://terra-bot.b42.tech/api/';
 let telegramAuthParams: string;
 
 async function main() {

@@ -4,7 +4,7 @@
   "description": "",
   "private": true,
   "scripts": {
-    "start": "webpack serve --open",
+    "start": "webpack && webpack serve --open",
     "build:prod": "webpack --config webpack.prod.js"
   },
   "keywords": [],

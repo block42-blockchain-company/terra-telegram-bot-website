@@ -9,7 +9,8 @@ This website is meant to be lightweight and is powered just by:
  
 It uses Terra Station Extension to communicate with Terra chain.
 
-## Command line
+## Running the project
+### From command line
 Before running any command remember to install dependencies with
 ```
 npm install
@@ -25,5 +26,9 @@ npm run build:prod
 ```
 Bundled source is available under `/dist`.
 
-## Intellij
+### From Intellij
 Intellij configurations are available out of the box. To debug the code first run `start` configuration and then `debug`. Make sure to have intellij browser plugin installed.
+
+## Connect with your own backend instance
+To connect it with your self hosted backend instace simply set 
+`backendUrl` variable in `/src/scripts/consts.ts` file to your address.
