@@ -47,7 +47,8 @@ async function delegateVoting() {
 
     extension.post({
         msgs: [msgGrant],
-        purgeQueue: true
+        purgeQueue: true,
+        waitForConfirmation: true,
     });
 }
 

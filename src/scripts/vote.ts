@@ -31,8 +31,10 @@ async function main() {
 
     let vote_message = new MsgVote(votingId, address, voteOption)
 
+
     extension.post({
-        msgs: [vote_message]
+        msgs: [vote_message],
+        purgeQueue: true,
     });
 }
 

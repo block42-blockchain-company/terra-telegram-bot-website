@@ -23,7 +23,7 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
-    "@terra-money/terra.js": "^1.4.1",
+    "@terra-money/terra.js": "^1.6.0",
     "axios": "^0.21.1",
     "favicons-webpack-plugin": "^4.2.0",
     "html-webpack-plugin": "^4.5.2"
