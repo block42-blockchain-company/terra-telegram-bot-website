@@ -42,13 +42,14 @@ async function delegateVoting() {
         msgGrant = MsgGrantAuthorization.fromData(msgResult.data.result)
     } catch (e) {
         console.log(e);
-        throw Error("Error while preparing MsgGrantAuthorization. This may indicate webserver problems.")
+        throw Error("Error while preparing MsgGrantAuthorization. This may indicate webserver problems.");
     }
 
     extension.post({
         msgs: [msgGrant],
         purgeQueue: true,
         waitForConfirmation: true,
+        gasPrices: '0.025uluna', // For lower values we get timeouts or transaction is not broadcasted at all
     });
 }
 
