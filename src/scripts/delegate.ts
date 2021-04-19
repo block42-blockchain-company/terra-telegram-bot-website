@@ -31,7 +31,7 @@ async function main() {
 
 async function delegateVoting() {
     const connect = await extension.request("connect");
-    walletAddress = connect.payload["address"]
+    walletAddress = connect.payload["address"];
     appendWalletAddressInfo(walletAddress);
 
     extension.on('onPost', onPost)
@@ -45,12 +45,13 @@ async function delegateVoting() {
         throw Error("Error while preparing MsgGrantAuthorization. This may indicate webserver problems.");
     }
 
-    extension.post({
-        msgs: [msgGrant],
+    const payload = await extension.request("post", {
+        msgs: [msgGrant].map((m) => m.toJSON()),
+        gasPrices: "0.15uusd",
         purgeQueue: true,
-        waitForConfirmation: true,
-        gasPrices: '0.025uluna', // For lower values we get timeouts or transaction is not broadcasted at all
     });
+
+    console.log(payload);
 }
 
 
